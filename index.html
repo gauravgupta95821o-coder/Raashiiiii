@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For Rashi 💌</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 10% 10%, #fff1e6 0%, transparent 25%),
+        radial-gradient(circle at 90% 15%, #f7c6ce 0%, transparent 20%),
+        radial-gradient(circle at 20% 90%, #f8d9c9 0%, transparent 25%),
+        linear-gradient(135deg, #f6e8d9, #e8c6bb, #f7e8df);
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+    color: #70283d;
+}
+
+/* FLOWER DECORATION */
+
+body::before {
+    content: "🌸  ✿  🌹  ✿  🌸";
+    position: fixed;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    opacity: .75;
+    pointer-events: none;
+}
+
+body::after {
+    content: "🌷  ✨  🌼  ✨  🌷";
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    opacity: .7;
+    pointer-events: none;
+}
+
+.container {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.top-label {
+    letter-spacing: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #a33c54;
+    margin-bottom: 12px;
+    animation: fadeIn 2s;
+}
+
+.name {
+    font-family: 'Great Vibes', cursive;
+    font-size: 76px;
+    color: #70283d;
+    font-weight: normal;
+    text-shadow: 0 5px 15px #ffffff80;
+    margin-bottom: 5px;
+    animation: fadeIn 2s;
+}
+
+.subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #9e5263;
+    font-size: 17px;
+    margin-bottom: 35px;
+}
+
+.envelope-wrapper {
+    width: 100%;
+    max-width: 350px;
+    height: 270px;
+    perspective: 1000px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #fff8ef;
+    border-radius: 4px;
+    box-shadow:
+        0 25px 45px rgba(90, 40, 50, .22),
+        inset 0 0 30px #e9d8c8;
+    overflow: visible;
+}
+
+.envelope-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(135deg, #fff8ee, #f1dfd1);
+    z-index: 3;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.envelope-front::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-left: 175px solid #e8d5c5;
+    border-right: 175px solid #e8d5c5;
+    border-top: 140px solid transparent;
+}
+
+.envelope-front::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 175px solid transparent;
+    border-right: 175px solid transparent;
+    border-top: 145px solid #f5e6d9;
+    transform-origin: top;
+    transition: transform 1s ease;
+}
+
+.envelope.open .envelope-front::after {
+    transform: rotateX(180deg);
+}
+
+.seal {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, #c15a68, #80182e 70%);
+    color: #ffe3e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow:
+        0 5px 12px #5c1428aa,
+        inset 0 2px 7px #ffffff50;
+    transition: opacity .5s, transform .7s;
+}
+
+.envelope.open .seal {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.8);
+}
+
+.letter-paper {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    bottom: 10px;
+    height: 90%;
+    background:
+        linear-gradient(135deg, #fffdf6, #f8eee0);
+    border-radius: 5px;
+    padding: 25px 18px;
+    z-index: 2;
+    transition: transform 1.3s ease, opacity .8s;
+    box-shadow: 0 5px 20px #00000012;
+    opacity: 0;
+}
+
+.envelope.open .letter-paper {
+    transform: translateY(-150px);
+    opacity: 1;
+}
+
+.letter-paper::before {
+    content: "💌";
+    display: block;
+    text-align: center;
+    font-size: 35px;
+}
+
+.envelope-text {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    top: 75%;
+    text-align: center;
+    color: #8c4052;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 21px;
+}
+
+.signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 35px;
+    color: #9d3c55;
+    margin: 20px 0 30px;
+    text-align: center;
+}
+
+.open-button {
+    border: none;
+    outline: none;
+    background: linear-gradient(135deg, #9c2440, #7b1831);
+    color: white;
+    padding: 17px 34px;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    box-shadow: 0 10px 25px #801c3c40;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.open-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px #801c3c50;
+}
+
+.open-button:active {
+    transform: scale(.96);
+}
+
+.bottom-text {
+    margin-top: 25px;
+    font-family: 'Great Vibes', cursive;
+    font-size: 30px;
+    color: #8c304a;
+}
+
+/* FULL LETTER */
+
+.full-letter {
+    display: none;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 30px;
+    padding: 35px 25px;
+    background: rgba(255, 250, 243, .96);
+    border: 1px solid #e9c8bc;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px #7c2b3c30;
+    animation: letterReveal 1.5s ease;
+    position: relative;
+}
+
+.full-letter::before,
+.full-letter::after {
+    content: "🌸";
+    position: absolute;
+    font-size: 25px;
+}
+
+.full-letter::before {
+    top: 10px;
+    left: 10px;
+}
+
+.full-letter::after {
+    bottom: 10px;
+    right: 10px;
+}
+
+@keyframes letterReveal {
+    from {
+        opacity: 0;
+        transform: translateY(70px) scale(.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.letter-heading {
+    font-family: 'Great Vibes', cursive;
+    font-size: 42px;
+    text-align: center;
+    color: #a33b55;
+    margin-bottom: 25px;
+}
+
+.message {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: #792b42;
+    font-size: 24px;
+    line-height: 2;
+    margin-bottom: 22px;
+    overflow-wrap: break-word;
+}
+
+.message:first-of-type {
+    font-size: 25px;
+}
+
+.from {
+    font-family: 'Great Vibes', cursive;
+    font-size: 38px;
+    text-align: center;
+    color: #a23851;
+    margin-top: 30px;
+}
+
+.heart {
+    position: fixed;
+    bottom: -40px;
+    animation: heartFloat linear forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes heartFloat {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.firework {
+    position: fixed;
+    z-index: 20;
+    pointer-events: none;
+    font-size: 25px;
+    animation: pop 1.5s ease-out forwards;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(.1);
+        opacity: 0;
+    }
+    40% {
+        transform: scale(1.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(.4) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media(max-width:400px) {
+    .name {
+        font-size: 65px;
+    }
+
+    .envelope-wrapper {
+        max-width: 310px;
+    }
+
+    .envelope-front::before {
+        border-left-width: 155px;
+        border-right-width: 155px;
+    }
+
+    .envelope-front::after {
+        border-left-width: 155px;
+        border-right-width: 155px;
+    }
+
+    .message {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top-label">
+        A LITTLE LOVE LETTER
+    </div>
+
+    <h1 class="name">Rashi</h1>
+
+    <div class="subtitle">
+        A little something for your beautiful morning ✨
+    </div>
+
+    <div id="opening">
+
+        <div class="envelope-wrapper" onclick="openLetter()">
+
+            <div class="envelope" id="envelope">
+
+                <div class="letter-paper">
+                    <br>
+                    <br>
+                    <div style="text-align:center;color:#b77b86;">
+                        A little love is waiting...
+                    </div>
+                </div>
+
+                <div class="envelope-front"></div>
+
+                <div class="seal">
+                    ♥
+                </div>
+
+                <div class="envelope-text">
+                    For Rashi 💌
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="signature">
+            with love, Gaurav Gupta
+        </div>
+
+        <button class="open-button" onclick="openLetter()">
+            Open the Letter 💌
+        </button>
+
+        <div class="bottom-text">
+            Made with love ❤️
+        </div>
+
+    </div>
+
+    <!-- YOUR LETTER -->
+
+    <div class="full-letter" id="fullLetter">
+
+        <div class="letter-heading">
+            Good Morning ❤️
+        </div>
+
+        <div class="message">
+            Good Morning Rashi Betaa🥹💋🥹💋💟💘💟🫀🫀🥹
+        </div>
+
+        <div class="message">
+            I lovee youu so Muchaaa meraa Babyy Gurlll💟🫀💋🫀💘🫀
+        </div>
+
+        <div class="message">
+            Mwaaaaaaah 💘💌💘🥹💘🥹
+        </div>
+
+        <div class="from">
+            From Your Gulaam ❤️
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+// OPEN LETTER ANIMATION
+
+function openLetter() {
+
+    const envelope = document.getElementById("envelope");
+    const opening = document.getElementById("opening");
+    const fullLetter = document.getElementById("fullLetter");
+
+    envelope.classList.add("open");
+
+    // Romantic celebration
+    celebration();
+
+    setTimeout(() => {
+        opening.style.display = "none";
+        fullLetter.style.display = "block";
+
+        window.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: "smooth"
+        });
+
+    }, 1500);
+}
+
+// FLOATING HEARTS
+
+function createHeart() {
+
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    const emojis = ["❤️", "💖", "💗", "💕", "💘", "💌", "✨", "🌸"];
+
+    heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (15 + Math.random() * 25) + "px";
+    heart.style.animationDuration = (4 + Math.random() * 5) + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 9000);
+}
+
+setInterval(createHeart, 700);
+
+// CELEBRATION
+
+function celebration() {
+
+    const emojis = ["✨", "💖", "🎉", "💕", "🌸", "💘", "💌"];
+
+    for (let i = 0; i < 35; i++) {
+
+        setTimeout(() => {
+
+            const item = document.createElement("div");
+
+            item.className = "firework";
+
+            item.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+            item.style.left = Math.random() * 100 + "vw";
+            item.style.top = Math.random() * 100 + "vh";
+
+            document.body.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, 1500);
+
+        }, i * 50);
+    }
+}
+
+</script>
+
+</body>
+</html>
